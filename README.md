@@ -7,4 +7,4 @@ Codes used in the simulation studies are in folder `Simulations/`. An example py
 
 ## Real data analyses
 
-Data matrices and codes used in the real data analyses are in folder `Real_data_analyses/`. Preprocessed data matrices are given as `csv` files. 
+Data matrices and codes used in the real data analyses are in folder `Real_data_analyses/`. Preprocessed data matrices are given as `csv` files. Real data analyses are done in a screen-and-select fashion. Codes for the screen step are in `screen.R` and codes for the select step are in the remaining python script.
