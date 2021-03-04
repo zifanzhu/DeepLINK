@@ -1,5 +1,5 @@
 # DeepLINK
-Deep Large-Scale Inference UsingKnockoffs
+Deep Large-Scale Inference Using Knockoffs
 
 ## Simulation studies
 
