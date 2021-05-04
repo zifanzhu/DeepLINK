@@ -118,15 +118,15 @@ def knockoff_construct(X, r, met, epoch, loss='mean_squared_error', verb=2):
 #   y: response vector
 #   met: activation method
 #   epoch: number of training epochs
-#   loss: loss function used in training (default: 'mean_squared_error')
 #   l1: l1 regularization factor
 #   lr: learning rate
+#   loss: loss function used in training (default: 'mean_squared_error')
 #   verb: verbose level (default: 2)
 # Output:
 #   W: knockoff statistics
 
 
-def knockoff_stats(X, y, met, epoch, loss='mean_squared_error', l1, lr, verb=2):
+def knockoff_stats(X, y, met, epoch, l1, lr, loss='mean_squared_error', verb=2):
     p = X.shape[1] // 2
 
     # implement DeepPINK
