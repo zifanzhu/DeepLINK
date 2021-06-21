@@ -7,4 +7,4 @@ Codes used in the simulation studies are in folder `Simulations/`. An example py
 
 ## Real data analyses
 
-Data matrices and codes used in the real data analyses are in folder `Real_data_analyses/`. Preprocessed data matrices are given as `csv` files. Real data analyses are done in a screen-and-select fashion. For each dataset, the code for the screen step is `screen.R` and the code for the select step is the remaining python script.
+Data matrices and codes used in the real data analyses are in folder `Real_data_analyses/`. Preprocessed data matrices are given as `csv` files under the corresponding `data/` folder. For the microbiome data analysis, we used an independent dataset `yu_CRC_common.csv` for screening. For the other two scRNA-seq datasets, the screening was done using 50% of the dataset itself. The `comparison` folder contains the codes for a prediction comparison analysis between DeepLINK, IPAD and Random Forests.
