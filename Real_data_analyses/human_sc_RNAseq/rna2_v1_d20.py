@@ -1,4 +1,6 @@
 import os
+# os.chdir('/Users/yikong/Dropbox (CSU Fullerton)/aResearch/DeepPINK/Documents_2020.07.04_1/real_data')
+os.chdir('/home/yinfeiko/DeepLINK/rna2')
 import random
 
 import DeepLINK as dl
@@ -10,18 +12,23 @@ from pairwise_connected_layer import PairwiseConnected
 import pandas as pd
 from keras.callbacks import EarlyStopping
 
-ds = 'microbiome'
-vs = 162
+ds = 'rna_data2'
+vs = 1
 
 d = 20
 
+def clr(arr):
+    geomean = np.mean(np.log(arr[arr > 0]))
+    return np.array([np.log(n) - geomean if n > 0 else 0 for n in arr])
+
 X0 = np.genfromtxt(ds + '.csv', delimiter=',', skip_header=1)
-y = X0[:,434]
-X = X0[:,0:434]
+y = X0[:, 23257]
+X = X0[:,0:23257]
 
-indmat_dist = np.genfromtxt('indmat_dist.csv', delimiter=',', skip_header=1)
-top200 = np.genfromtxt('top200.csv', delimiter=',', skip_header=1) - 1
+indmat_dist = np.genfromtxt('indmat_dist_p50.csv', delimiter=',', skip_header=1)
+top200 = np.genfromtxt('top500_rna2.csv', delimiter=',', skip_header=1) - 1
 
+# X = np.apply_along_axis(clr, 1, X)
 # center_scale data
 X -= np.mean(X, axis=0)
 X /= np.std(X, axis=0, ddof=1)
@@ -47,8 +54,8 @@ mat_selected_plus = np.zeros([nrep, d])
 
 # n_train = int(round(n*0.6))
 # n_test = int(round(n*0.1))
-n_train = 110
-n_test = 19
+n_train = 253
+n_test = 63
 indmat = np.zeros([n_train, nrep])
 yhat_train = np.zeros([nrep, n_train])
 yhat_test = np.zeros([nrep, n_test])

@@ -1,13 +1,14 @@
+
 rm(list = ls()); gc()
-dat1 = read.csv('microbiome.csv', head = T, stringsAsFactors = F)
-# dat1$label = as.factor(dat1$label)
+setwd('/home/yinfeiko/DeepLINK/newdata2')
+dat1 = read.csv('yu_CRC_common.csv', head = T, stringsAsFactors = F)
 
 nrep = 100
 pe = rep(NA, nrep)
 n = nrow(dat1); n.train = round(n*.5)
 p = ncol(dat1) - 1
 indmat.dist = matrix(NA, nrep, n.train)
-top200 = matrix(NA, 200, nrep)
+top250 = matrix(NA, 250, nrep)
 
 library("energy")
 dist.m = function(mat) {
@@ -32,17 +33,8 @@ myTest = function(XX, YY) {
   1 - pt(T_R, v-1)
 }
 
-ind.y = which(colnames(dat1) == 'label')
-for (ii in 1:nrep) {
-  print(ii)
-  set.seed(ii)
-  ind.train = sample(1:n, n.train)
-  ind.test = setdiff(1:n, ind.train)
-  indmat.dist[ii,] = ind.train
-  
-  pvec = apply(dat1[ind.train,-ind.y], 2, myTest, YY = as.matrix(dat1[ind.train,ind.y]))
-  top200[,ii] = sort(pvec, index.return=T)$ix[1:200]
-}
-
-write.csv(indmat.dist, file = 'indmat_dist_p50.csv', row.names = F)
-write.csv(top200, file = 'top200_p50.csv', row.names = F)
+ind.y = which(colnames(dat1) == 'real_y')
+set.seed(1)
+pvec = apply(dat1[,-ind.y], 2, myTest, YY = as.matrix(dat1[,ind.y]))
+top250 = sort(pvec, index.return=T)$ix[1:250]
+write.csv(top250, file = 'screen_top250.csv', row.names = F)

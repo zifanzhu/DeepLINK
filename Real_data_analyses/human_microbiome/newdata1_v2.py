@@ -1,4 +1,6 @@
 import os
+# os.chdir('/Users/yikong/Dropbox (CSU Fullerton)/aResearch/DeepPINK/Documents_2020.07.04_1/real_data')
+os.chdir('/home/yinfeiko/DeepLINK/newdata1')
 import random
 
 import DeepLINK as dl
@@ -10,18 +12,22 @@ from pairwise_connected_layer import PairwiseConnected
 import pandas as pd
 from keras.callbacks import EarlyStopping
 
-ds = 'murine_rna'
-vs = 1
+ds = 'microbiome_data1_common'
+vs = 2
 
-d = 20
+d = 30
+
+def clr(arr):
+    geomean = np.mean(np.log(arr[arr > 0]))
+    return np.array([np.log(n) - geomean if n > 0 else 0 for n in arr])
 
 X0 = np.genfromtxt(ds + '.csv', delimiter=',', skip_header=1)
-y = X0[:, 13777]
-X = X0[:,0: 13777]
+y = X0[:, 274]
+X = X0[:,0:274]
 
-indmat_dist = np.genfromtxt('indmat_dist_p50.csv', delimiter=',', skip_header=1)
-top200 = np.genfromtxt('top200_p50.csv', delimiter=',', skip_header=1) - 1
+top250 = np.genfromtxt('screen_top250.csv', delimiter=',', skip_header=1) - 1
 
+# X = np.apply_along_axis(clr, 1, X)
 # center_scale data
 X -= np.mean(X, axis=0)
 X /= np.std(X, axis=0, ddof=1)
@@ -47,8 +53,8 @@ mat_selected_plus = np.zeros([nrep, d])
 
 # n_train = int(round(n*0.6))
 # n_test = int(round(n*0.1))
-n_train = 228
-n_test = 57
+n_train = 147
+n_test = 37
 indmat = np.zeros([n_train, nrep])
 yhat_train = np.zeros([nrep, n_train])
 yhat_test = np.zeros([nrep, n_test])
@@ -57,7 +63,7 @@ pe_train = [0.]*nrep
 
 for i in range(nrep):
     
-    ind_col = top200[range(d),i].astype(int)
+    ind_col = top250[range(d)].astype(int)
     X1 = X[:,ind_col]
     ## autoencoder ##
     r_hat = 3
@@ -77,12 +83,9 @@ for i in range(nrep):
     #################
 
     random.seed(58*i)
-    ######### load data #########
-    ind_dist = indmat_dist[i,:] - 1
-    ind_dnn = list(set(np.arange(n)) - set(ind_dist))
-    
-    ind_train = np.random.choice(ind_dnn, n_train, False)
-    ind_test = list(set(ind_dnn) - set(ind_train))
+    ######### load data #########    
+    ind_train = np.random.choice(np.arange(n), n_train, False)
+    ind_test = list(set(np.arange(n)) - set(ind_train))
     
     Xnew_train = Xnew[ind_train,:]
     Xnew_test = Xnew[ind_test,:]

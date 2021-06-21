@@ -1,4 +1,6 @@
 import os
+# os.chdir('/Users/yikong/Dropbox (CSU Fullerton)/aResearch/DeepPINK/Documents_2020.07.04_1/real_data')
+os.chdir('/home/yinfeiko/DeepLINK/rna2')
 import random
 
 import DeepLINK as dl
@@ -10,18 +12,23 @@ from pairwise_connected_layer import PairwiseConnected
 import pandas as pd
 from keras.callbacks import EarlyStopping
 
-ds = 'human_rna'
-vs = 1
+ds = 'rna_data2'
+vs = 9
 
-d = 20
+d = 500
+
+def clr(arr):
+    geomean = np.mean(np.log(arr[arr > 0]))
+    return np.array([np.log(n) - geomean if n > 0 else 0 for n in arr])
 
 X0 = np.genfromtxt(ds + '.csv', delimiter=',', skip_header=1)
 y = X0[:, 23257]
 X = X0[:,0:23257]
 
 indmat_dist = np.genfromtxt('indmat_dist_p50.csv', delimiter=',', skip_header=1)
-top200 = np.genfromtxt('top200_p50.csv', delimiter=',', skip_header=1) - 1
+top500 = np.genfromtxt('top500_rna2.csv', delimiter=',', skip_header=1) - 1
 
+# X = np.apply_along_axis(clr, 1, X)
 # center_scale data
 X -= np.mean(X, axis=0)
 X /= np.std(X, axis=0, ddof=1)
@@ -57,7 +64,7 @@ pe_train = [0.]*nrep
 
 for i in range(nrep):
     
-    ind_col = top200[range(d),i].astype(int)
+    ind_col = top500[range(d),i].astype(int)
     X1 = X[:,ind_col]
     ## autoencoder ##
     r_hat = 3
