@@ -1,8 +1,8 @@
-# title             :deeplink.py
-# description       :Deep Learning Inference Using Knockoffs
-# author            :Zifan Zhu
-# contact           :zifanzhu@usc.edu
-# version           :1.0.0
+# Title             :deeplink.py
+# Description       :Deep Learning Inference Using Knockoffs
+# Author            :Zifan Zhu
+# Contact           :zifanzhu@usc.edu
+# Version           :1.0.0
 
 #### parse arguments ####
 
