@@ -16,15 +16,15 @@ parser.add_option("-y", "--response", action="store", type="string",
 parser.add_option("-o", "--out", action="store", type="string",
                   dest="output_dir", help="output directory")
 parser.add_option("-s", action="store_true", dest="skip_preprocess",
-                  help="use this flag if do not want to center and scale data (center/scale makes every feature column have mean 0/sd 1)")
+                  help="use this flag if you do not want to center and scale data (center/scale makes every feature column have mean 0/sd 1)")
 parser.add_option("-l", "--l1", action="store", type="float", dest="l1",
-                  default=0.001, help="l1 regularization coefficient used in DeepPINK [default: %default]")
+                  default=0.001, help="l1 regularization coefficient used in the feature selection MLP [default: %default]")
 parser.add_option("-r", "--lr", action="store", type="float", dest="lr",
-                  default=0.001, help="learning rate used in DeepPINK [default: %default]")
+                  default=0.001, help="learning rate used in the feature selection MLP [default: %default]")
 parser.add_option("-a", "--act", action="store", type="string",
-                  dest="act", default="elu", help="activation function used in DeepPINK [default: %default]")
+                  dest="act", default="elu", help="activation function used in the feature selection MLP [default: %default]")
 parser.add_option("-L", "--loss", action="store", type="string",
-                  dest="loss", default="mean_squared_error", help="loss function used in DeepPINK [default: %default]")
+                  dest="loss", default="mean_squared_error", help="loss function used in the feature selection MLP [default: %default]")
 parser.add_option("-q", "--fdr_level", action="store", type="float", default=0.2,
                   dest="q", help="fdr level [default: %default]")
 
