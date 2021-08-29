@@ -43,7 +43,7 @@ The inputs of DeepLINK are sample-by-feature data matrix and the corresponding r
                           [default: mean_squared_error]
     -q Q, --fdr_level=Q   fdr level [default: 0.2]
     
-### Toy example
+### A toy example
 
 Run the following code and the outputs are in folder `test/out`:
     
