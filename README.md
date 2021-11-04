@@ -1,6 +1,8 @@
 # DeepLINK: Deep Learning INference using Knockoffs
 
-DeepLINK is a variable selection algorithm that guarantees the false discovery rate (FDR) control in high-dimensional settings. It consists of two major parts: an autoencoder network for the knockoff variable construction and a multilayer perceptron network for feature selection with the FDR control.
+DeepLINK is a variable selection algorithm that guarantees the false discovery rate (FDR) control in high-dimensional settings. It consists of two major parts: an autoencoder network for the knockoff variable construction and a multilayer perceptron network for feature selection with the FDR control. More details of DeepLINK are provided in the following paper:
+
+[Zhu, Z., Fan, Y., Kong, Y., Lv, J., & Sun, F. (2021). DeepLINK: Deep learning inference using knockoffs with applications to genomics. *Proceedings of the National Academy of Sciences*, 118(36).](https://www.pnas.org/content/118/36/e2104683118.short)
 
 ## Dependencies
 
@@ -58,6 +60,12 @@ Codes used in the simulation studies are in folder `Simulations/`. An example py
 ### Real data analyses
 
 Data matrices and codes used in the real data analyses are in folder `Real_data_analyses/`. Preprocessed data matrices are given as `csv` files under the corresponding `data/` folder. For the microbiome data analysis, we used an independent dataset `yu_CRC_common.csv` for screening. For the other two scRNA-seq datasets, the screening was done using 50% of the dataset itself. The `comparison` folder contains the codes for a prediction comparison analysis between DeepLINK, IPAD and Random Forests.
+
+## Citation
+
+If you use DeepLINK, please cite the following paper:
+
+[Zhu, Z., Fan, Y., Kong, Y., Lv, J., & Sun, F. (2021). DeepLINK: Deep learning inference using knockoffs with applications to genomics. *Proceedings of the National Academy of Sciences*, 118(36).](https://www.pnas.org/content/118/36/e2104683118.short)
 
 ## Copyright and License Information
 
